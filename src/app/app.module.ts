@@ -1,24 +1,34 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
+import {MyApp} from './app.component';
+import {CoreModule} from "./core/core.module";
+import {ErrorLoadPage} from "./main/error-load.component";
+import {AppLoadPage} from "./main/app-load.component";
+import {WorkspacePage} from "./main/workspace.component";
+
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {DEBUG_LOGGER_PROVIDERS} from "angular2-logger/core";
 
 @NgModule({
   declarations: [
     MyApp,
-    Page1,
-    Page2
+    ErrorLoadPage,
+    AppLoadPage,
+    WorkspacePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    CoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Page1,
-    Page2
+    ErrorLoadPage,
+    AppLoadPage,
+    WorkspacePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    DEBUG_LOGGER_PROVIDERS,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class AppModule {}
