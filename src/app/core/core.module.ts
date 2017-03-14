@@ -8,7 +8,7 @@ import {NgModule} from '@angular/core';
 import {Logger} from "angular2-logger/core";
 import {EicOauth2AuthorizeService} from "elipcero-ionic-core";
 
-let eicOauth2AuthorizeServiceFactory = (logger: Logger) => {
+export function eicOauth2AuthorizeServiceFactory(logger: Logger) {
   return new EicOauth2AuthorizeService(config.oAuth2Config, logger);
 };
 

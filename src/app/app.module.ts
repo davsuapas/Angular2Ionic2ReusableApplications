@@ -6,7 +6,7 @@ import {WorkspacePage} from "./main/workspace.component";
 
 import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
-import {DEBUG_LOGGER_PROVIDERS} from "angular2-logger/core";
+import {Options, Level, Logger} from "angular2-logger/core";
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import {DEBUG_LOGGER_PROVIDERS} from "angular2-logger/core";
     WorkspacePage
   ],
   providers: [
-    DEBUG_LOGGER_PROVIDERS,
+    [ { provide: Options, useValue: { level: Level.DEBUG } }, Logger ],
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
