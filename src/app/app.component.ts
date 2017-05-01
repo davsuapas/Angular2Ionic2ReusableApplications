@@ -1,12 +1,14 @@
-import {ContextStorage} from "./core/contexts/context-storage.service";
-import {AccessControl} from "./core/login/access-control.service";
+import {ContextStorageService} from './core/contexts/context-storage.abstract.service';
+import {AccessControlService} from './core/login/access-control.abstract.service';
+import {AquariumManagementListPage} from './aquarium-management/aquarium-list.component';
 import {AppLoadPage} from "./main/app-load.component";
 import {WorkspacePage} from "./main/workspace.component";
 import {ErrorLoadPage} from "./main/error-load.component";
 
 import {Component, ViewChild} from '@angular/core';
 import {Platform, Nav} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,19 +20,18 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, private accessControl: AccessControl, private contextStorage: ContextStorage) {
-    this.initializeApp();
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    private accessControl: AccessControlService,
+    private contextStorage: ContextStorageService) {
 
-    this.pages = [
-    ];
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
+    platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+      statusBar.styleDefault();
+      splashScreen.hide();
 
       // Init and checking storage permission
       this.contextStorage.init().then(
@@ -44,6 +45,10 @@ export class MyApp {
           "Por la seguridad de sus datos, esta aplicación no funciona si no tiene configurado el sistema de bloqueo de pantalla de su dispositivo")
       );
     });
+
+    this.pages = [
+      {title: "Lista de aquarios", component: AquariumManagementListPage}
+    ];
   }
 
   openPage(page) {

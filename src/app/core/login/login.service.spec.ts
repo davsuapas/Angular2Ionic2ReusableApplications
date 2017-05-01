@@ -5,8 +5,8 @@ import {ContextService} from "../contexts/context.service";
 import {ContextStorageMock, contextMock} from "../mock";
 import {TestUtils} from "../../../test";
 
-import {inject, async} from '@angular/core/testing';
-import {EicOauth2AuthorizeService} from "elipcero-ionic-core"
+import { inject, async } from '@angular/core/testing';
+import { EicOauth2AuthorizeService } from "../../library/index";
 
 describe('LoginService', () => {
 
@@ -14,9 +14,9 @@ describe('LoginService', () => {
     TestUtils.configureIonicTestingModule([
         ContextService,
         LoginService,
-        {provide: EicOauth2AuthorizeService, useValue: new EicOauth2AuthorizeService(null, null)},
+        {provide: EicOauth2AuthorizeService, useValue: new EicOauth2AuthorizeService(undefined, undefined, undefined)},
         {provide: ContextStorage, useClass: ContextStorageMock}
-      ])
+      ]);
   });
 
   it('should login and configure context', async(() => { inject([LoginService, EicOauth2AuthorizeService, ContextService], (loginService: LoginService, authService: EicOauth2AuthorizeService, contextService: ContextService) => {
@@ -29,7 +29,7 @@ describe('LoginService', () => {
         expect(context).toEqual(contextMock);
       }
     );
-  })}));
+  }); }));
 
   it('should get error storaging information context', async(() => { inject([LoginService, EicOauth2AuthorizeService, ContextStorage], (loginService: LoginService, authService: EicOauth2AuthorizeService, contextStorage: ContextStorage) => {
     setAuthServiceMock(authService);
@@ -39,7 +39,7 @@ describe('LoginService', () => {
     loginService.login().catch(
         (error) => expect(error).toMatch(/storaging/)
     );
-  })}));
+  }); }));
 
   it('should get error calling authorizeInBrowser', async(() => { inject([LoginService, EicOauth2AuthorizeService], (loginService: LoginService, authService: EicOauth2AuthorizeService) => {
     spyOn(authService, "authorizeInBrowser").and.returnValue(Promise.reject("error"));
@@ -47,7 +47,7 @@ describe('LoginService', () => {
     loginService.login().catch(
         (error) => expect(error).toMatch(/system/)
     );
-  })}));
+  }); }));
 
   function setAuthServiceMock(authService: EicOauth2AuthorizeService) {
     spyOn(authService, "authorizeInBrowser")

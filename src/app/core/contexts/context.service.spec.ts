@@ -1,5 +1,4 @@
 import {ContextService} from './context.service';
-
 import {contextMock} from "../mock";
 
 import {TestBed, inject} from '@angular/core/testing';

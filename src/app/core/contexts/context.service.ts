@@ -8,7 +8,7 @@ Storaging context applicaion global information
 @Injectable()
 export class ContextService {
 
-  private context: UserContext
+  private context: UserContext;
 
   constructor() { }
 

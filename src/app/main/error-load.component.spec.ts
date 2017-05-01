@@ -8,7 +8,7 @@ import {By} from '@angular/platform-browser';
 
 describe('ErrorLoadpage', () => {
 
-  const descriptionError: string = "descriptionerror";
+  const descriptionError = "descriptionerror";
 
   let fixture: ComponentFixture<ErrorLoadPage>;
 
@@ -29,7 +29,7 @@ describe('ErrorLoadpage', () => {
   });
 
   it('should click exit button and execute platform.exitApp()', inject([Platform], (platform: Platform) => {
-    fixture.debugElement.query(By.css('button')).triggerEventHandler("click", null);
+    fixture.debugElement.query(By.css('button')).triggerEventHandler("click", undefined);
     expect(platform.exitApp).toHaveBeenCalled();
   }));
 });

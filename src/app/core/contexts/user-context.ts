@@ -1,4 +1,4 @@
 export interface UserContext {
-  profileId: String,
-  securityToken: String
+  profileId: String;
+  securityToken: String;
 }

@@ -1,28 +1,31 @@
 import {UserContext} from "./user-context";
+import { ContextStorageService } from "./context-storage.abstract.service";
 
 import {Injectable} from '@angular/core';
-import {SecureStorage} from 'ionic-native';
-import {Logger} from "angular2-logger/core";
-import {eicformatlog} from "elipcero-ionic-core";
+import {SecureStorage, SecureStorageObject} from '@ionic-native/secure-storage';
+import { Logger } from "angular2-logger/core";
+import { eicformatlog } from "../../library/index";
 
 /*
 Storaging context in mobile storage secure
  */
 @Injectable()
-export class ContextStorage {
+export class ContextStorage extends ContextStorageService {
 
-  private secureStorage: SecureStorage;
+  private readonly storageItemName = "user-context";
 
-  private readonly storageItemName: string = "user-context";
+  private storage: SecureStorageObject;
 
-  constructor(private logger: Logger) {
+  constructor(private logger: Logger, private secureStorage: SecureStorage) {
+    super();
   }
 
   init(): Promise<any> {
-    this.secureStorage = new SecureStorage();
-
     return this.secureStorage.create('sushi-storage')
-     .catch(
+      .then( (storageObject: SecureStorageObject) => {
+         this.storage = storageObject;
+      })
+      .catch(
        error => {
          this.logger.error(error);
          return Promise.reject(error);
@@ -31,7 +34,7 @@ export class ContextStorage {
   }
 
   getUser(): Promise<UserContext> {
-    return this.secureStorage.get(this.storageItemName)
+    return this.storage.get(this.storageItemName)
       .then(
         data => {
           this.logger.debug(eicformatlog(ContextStorage.name, data));
@@ -45,7 +48,7 @@ export class ContextStorage {
   }
 
   saveUser(context: UserContext): Promise<any> {
-    return this.secureStorage.set(this.storageItemName, JSON.stringify(context))
+    return this.storage.set(this.storageItemName, JSON.stringify(context))
       .catch(
         error => {
           this.logger.error(error);

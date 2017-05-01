@@ -10,7 +10,7 @@ import {NavParams, Platform} from "ionic-angular";
 })
 export class ErrorLoadPage {
 
-  error: string
+  error: string;
 
   constructor(navParams: NavParams, private platform: Platform) {
       this.error = navParams.data;

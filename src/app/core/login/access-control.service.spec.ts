@@ -1,5 +1,5 @@
+import {ContextStorageService} from '../contexts/context-storage.abstract.service';
 import {AccessControl} from "./access-control.service";
-import {ContextStorage} from "../contexts/context-storage.service";
 import {LoginService} from "../login/login.service";
 import {ContextService} from "../contexts/context.service";
 import {TestUtils} from "../../../test";
@@ -15,11 +15,11 @@ describe('AccessControlService', () => {
         ContextService,
         AccessControl,
         {provide: LoginService, useClass: LoginServiceMock},
-        {provide: ContextStorage, useClass: ContextStorageMock}
-      ])
+        {provide: ContextStorageService, useClass: ContextStorageMock}
+      ]);
   });
 
-  it('should get context from repository and configure context', async(() => { inject([AccessControl, ContextService, ContextStorage], (accessControl: AccessControl, contextService: ContextService, contextStorage: ContextStorage) => {
+  it('should get context from repository and configure context', async(() => { inject([AccessControl, ContextService, ContextStorageService], (accessControl: AccessControl, contextService: ContextService, contextStorage: ContextStorageService) => {
     spyOn(contextService, "setUser");
 
     accessControl.CheckIn().then(
@@ -28,26 +28,26 @@ describe('AccessControlService', () => {
         expect(context).toEqual(contextMock);
       }
     );
-  })}));
+    }); }));
 
-  it('should not get context and then login successfully', async(() => { inject([AccessControl, ContextStorage], (accessControl: AccessControl, contextStorage: ContextStorage) => {
+  it('should not get context and then login successfully', async(() => { inject([AccessControl, ContextStorageService], (accessControl: AccessControl, contextStorage: ContextStorageService) => {
     setUserMock(contextStorage);
 
     accessControl.CheckIn().then(
       (context) => expect(context).toEqual(contextMock)
     );
-  })}));
+  }); }));
 
-  it('should not get context and the login throw error', async(() => { inject([AccessControl, ContextStorage, LoginService], (accessControl: AccessControl, contextStorage: ContextStorage, loginService: LoginService) => {
+  it('should not get context and the login throw error', async(() => { inject([AccessControl, ContextStorageService, LoginService], (accessControl: AccessControl, contextStorage: ContextStorageService, loginService: LoginService) => {
     setUserMock(contextStorage);
     spyOn(loginService, "login").and.returnValue(Promise.reject("error"));
 
     accessControl.CheckIn().catch(
         (error) => expect(error).toMatch(/error/)
     );
-  })}));
+  }); }));
 
-  function setUserMock(contextStorage: ContextStorage) {
+  function setUserMock(contextStorage: ContextStorageService) {
       spyOn(contextStorage, "getUser").and.returnValue(Promise.reject("key not found"));
   }
 });

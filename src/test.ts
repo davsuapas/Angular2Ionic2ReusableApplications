@@ -8,8 +8,8 @@ import 'zone.js/dist/fake-async-test';
 import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
 import {OFF_LOGGER_PROVIDERS} from "angular2-logger/core";
 import {getTestBed, TestBed} from '@angular/core/testing';
-import {Platform} from "ionic-angular";
-import {EicPlatformMock} from "elipcero-ionic-core/test";
+import { IonicModule } from "ionic-angular";
+import { EIC_TEST_CORE_PROVIDERS } from "./app/library/test/index";
 
 // Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
 declare var __karma__: any;
@@ -37,7 +37,7 @@ export class TestUtils {
   public static beforeEachCompiler(components: Array<any>, providers: Array<any> = []): Promise<{fixture: any, instance: any}> {
     return TestUtils.configureIonicTestingModule(providers, components)
       .compileComponents().then(() => {
-        let fixture: any = TestBed.createComponent(components[0]);
+        const fixture: any = TestBed.createComponent(components[0]);
         return {
           fixture: fixture,
           instance: fixture.debugElement.componentInstance,
@@ -50,8 +50,11 @@ export class TestUtils {
       declarations: [...components],
       providers: [
         OFF_LOGGER_PROVIDERS,
+        EIC_TEST_CORE_PROVIDERS,
         ...providers,
-        {provide: Platform, useValue: EicPlatformMock}
+      ],
+      imports: [
+        IonicModule,
       ]
     });
   }
