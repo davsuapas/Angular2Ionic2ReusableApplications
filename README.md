@@ -1,6 +1,7 @@
 # Angular2Ionic2ReusableApplications
-An example to create reusable applications with angular + ionic 
- Documentation: https://davidsuarez-architecture-development.blogspot.com.es/2016/07/applications-factory-with-angular2-and.html
+An example to create reusable applications with angular + ionic
+
+Documentation: https://davidsuarez-architecture-development.blogspot.com.es/2016/07/applications-factory-with-angular2-and.html
 
 Updated:
 
