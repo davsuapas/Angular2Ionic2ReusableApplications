@@ -4,6 +4,6 @@ Documentation: https://davidsuarez-architecture-development.blogspot.com.es/2016
 
 Updated:
 
-Angular: 4.0.2
-Ionic: 3.1.1
-Angular-cli: 1.0.1
+- Angular: 4.0.2
+- Ionic: 3.1.1
+- Angular-cli: 1.0.1
