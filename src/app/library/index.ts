@@ -8,6 +8,7 @@ export {EicOauth2ConfigAuthorize, EicOauth2ConfigParams} from "./security/oauth2
 
 export {eicformatlog} from "./loggers/formatter";
 
+// CrudList
 export {EicCrudListAddButtonComponent} from "./crudlist/crudlist-addbutton.component";
 export {EicCrudListContainer} from "./crudlist/crudlist-container";
 export {EicCrudListController, EicKeyName} from "./crudlist/crudlist-controller";
@@ -15,4 +16,14 @@ export {EicCrudListData} from "./crudlist/crudlist-data";
 export {EicCrudListItemComponent} from "./crudlist/crudlist-item.component";
 export {EicCrudListOptions} from "./crudlist/crudlist-options";
 export {EicCrudListModule} from "./crudlist/crudlist.module";
+
+// FormEdition
+export {EicFormEditionModule} from "./form-edition/form-edition.module";
+export {EicEditionController} from "./form-edition/edition-controller";
+export {EicEditionControllerContainer} from "./form-edition/edition-controller-container";
+export {EicEditionData} from "./form-edition/edition-data";
+
+// Form Validation
+export {EicNumericValidator} from "./form-validation/validator";
+export {EicFormValidationModule} from "./form-validation/form-validation.module";
 

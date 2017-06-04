@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Edición de aquario</ion-title>
+      <eic-edition-accept-button></eic-edition-accept-button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <form [formGroup]="form">
+
+        <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <eic-edition-error-message [formGroup]="form" controlName="name" validationName="required" >El nombre es un campo requerido</eic-edition-error-message>
+        <eic-edition-error-message [formGroup]="form" controlName="name" validationName="maxlength" >El nombre no puede superar los 35 caracteres</eic-edition-error-message>
+
+        <ion-item>
+            <ion-label stacked>Tipo</ion-label>
+            <ion-select formControlName="type">
+                <ion-option value="freshWater">Dulce</ion-option>
+                <ion-option value="saltWater">Salada</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Alto</ion-label>
+            <ion-input formControlName="high" type="number"></ion-input>
+        </ion-item>
+        <eic-edition-error-message [formGroup]="form" controlName="high" validationName="numeric" >El alto debe ser un campo numérico</eic-edition-error-message>
+
+        <ion-item>
+            <ion-label floating>Ancho</ion-label>
+            <ion-input formControlName="width" type="number"></ion-input>
+        </ion-item>
+        <eic-edition-error-message [formGroup]="form" controlName="width" validationName="numeric" >El ancho debe ser un campo numérico</eic-edition-error-message>
+
+        <ion-item>
+            <ion-label floating>Profundidad</ion-label>
+            <ion-input formControlName="deep" type="number"></ion-input>
+        </ion-item>
+        <eic-edition-error-message [formGroup]="form" controlName="deep" validationName="numeric" >La profundidad debe ser un campo numérico</eic-edition-error-message>
+
+        <ion-item>
+            <ion-label floating>Capacidad</ion-label>
+            <ion-input formControlName="capacity" type="number"></ion-input>
+        </ion-item>
+        <eic-edition-error-message [formGroup]="form" controlName="capacity" validationName="numeric" >La capacidad debe ser un campo numérico</eic-edition-error-message>
+
+    </form>
+</ion-content>

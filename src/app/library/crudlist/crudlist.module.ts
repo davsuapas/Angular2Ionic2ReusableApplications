@@ -13,7 +13,6 @@ import { IonicModule } from "ionic-angular";
         IonicModule
     ],
     exports: [
-        IonicModule,
         EicCrudListAddButtonComponent,
         EicCrudListItemComponent
     ]

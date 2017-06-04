@@ -1,3 +1,4 @@
+import {AquariumManagementEditionPage} from './aquarium-management/aquarium-edition.component';
 import {MyApp} from './app.component';
 import {CoreModule} from "./core/core.module";
 import {ErrorLoadPage} from "./main/error-load.component";
@@ -32,7 +33,8 @@ import { BrowserModule } from '@angular/platform-browser';
     ErrorLoadPage,
     AppLoadPage,
     WorkspacePage,
-    AquariumManagementListPage
+    AquariumManagementListPage,
+    AquariumManagementEditionPage
   ],
   providers: [
     [ { provide: Options, useValue: { level: Level.DEBUG } }, Logger ],

@@ -19,7 +19,7 @@ export function eicOauth2AuthorizeServiceFactory(logger: Logger, appBrowser: InA
 };
 
 export function contextStorageServiceFactory(config: any, logger: Logger, secure: SecureStorage): ContextStorageService {
-  if (config.debugBrowser) {
+  if (config.debugNoServer) {
       return  new ContextStorageTestMock();
   }
   else {
@@ -28,7 +28,7 @@ export function contextStorageServiceFactory(config: any, logger: Logger, secure
 }
 
 export function accessControlServiceFactory(config: any, contextStorage: ContextStorageService, login: LoginService, contextService: ContextService, logger: Logger): AccessControlService {
-  if (config.debugBrowser) {
+  if (config.debugNoServer) {
       return  new AccessControlTestMock();
   }
   else {

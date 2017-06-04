@@ -1,6 +1,6 @@
 import {EicCrudListData} from "./crudlist-data";
 import {EicKeyName, EicCrudListController} from "./crudlist-controller";
-import {EicEnumEditionType} from "../formedit/edition-controller";
+import {EicEnumEditionType} from "../form-edition/edition-type";
 import {EicClassMock} from "../mock";
 import { EicCrudListContainer } from "./crudlist-container";
 import {EIC_PROVIDER_TEST_CRUDLIST_CONTROLLER} from "./provider.test";
@@ -12,14 +12,14 @@ import "rxjs/add/observable/of";
 import {async, ComponentFixture} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-describe('EicCrudListController', () => {
+describe('CrudListController', () => {
 
     const CONST_NAME = "name";
     const CONST_ID = "1";
 
     @Injectable()
     @EicKeyName("id")
-    class DataServiceMock extends EicCrudListData {
+    class DataServiceMock implements EicCrudListData {
         getAll() {
             return Observable.of<any[]>([
                 {id: CONST_ID, name: CONST_NAME},
@@ -32,11 +32,11 @@ describe('EicCrudListController', () => {
             <ion-list *ngFor="let item of items">
                 <button (click)="navEditItem(item)"></button>
             </ion-list>`,
-        providers: [{provide: EicCrudListData, useClass: DataServiceMock}],
+        providers: [DataServiceMock],
         viewProviders: [EicCrudListContainer]
     })
     class CrudListControllerPage extends EicCrudListController {
-        constructor(container: EicCrudListContainer, dataServiceMock: EicCrudListData) {
+        constructor(container: EicCrudListContainer, dataServiceMock: DataServiceMock) {
             super(
               container,
               {
@@ -102,16 +102,18 @@ describe('EicCrudListController', () => {
 
 
     it('Is called from the edition form to update item at the list items', () => {
-        const CONST_NAME_UPDATE = "name1";
         fixture.detectChanges();
+        
+        const CONST_NAME_UPDATE = "name1";
         instance.updateItem({id: CONST_ID, name: CONST_NAME_UPDATE});
 
         expect(instance.items[0].name).toBe(CONST_NAME_UPDATE);
     });
 
     it('Is called from the edition form to add item at the items list and scroll to top', () => {
-        const CONST_ID_ADD = "2";
         fixture.detectChanges();
+        
+        const CONST_ID_ADD = "2";
         instance.addItem({id: CONST_ID_ADD, name: CONST_NAME});
 
         expect(instance.items[0]).toEqual({id: CONST_ID_ADD, name: CONST_NAME, __isNew: true});
@@ -119,7 +121,7 @@ describe('EicCrudListController', () => {
     });
 
     it("Checking that UICrudListService doesn't contain the @KeyName decorator", () => {
-        class DataServiceWithoutDecoratorMock extends EicCrudListData {
+        class DataServiceWithoutDecoratorMock implements EicCrudListData {
            getAll() { return undefined; }
         }
         instance["crudData"] = new DataServiceWithoutDecoratorMock();

@@ -8,7 +8,7 @@ import {Component} from "@angular/core";
 import { async } from '@angular/core/testing';
 import { NavController } from "ionic-angular";
 
-describe('EicCrudListController.Integration', () => {
+describe('CrudListController.Integration', () => {
 
   @Component({
     template: `

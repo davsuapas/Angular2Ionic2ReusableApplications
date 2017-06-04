@@ -34,8 +34,8 @@ __karma__.start();
 
 export class TestUtils {
 
-  public static beforeEachCompiler(components: Array<any>, providers: Array<any> = []): Promise<{fixture: any, instance: any}> {
-    return TestUtils.configureIonicTestingModule(providers, components)
+  public static beforeEachCompiler(components: Array<any>, providers: Array<any> = [], imports: Array<any> = []): Promise<{fixture: any, instance: any}> {
+    return TestUtils.configureIonicTestingModule(providers, components, imports)
       .compileComponents().then(() => {
         const fixture: any = TestBed.createComponent(components[0]);
         return {
@@ -45,16 +45,17 @@ export class TestUtils {
       });
   }
 
-  public static configureIonicTestingModule(providers: Array<any>, components: Array<any> = []): typeof TestBed {
+  public static configureIonicTestingModule(providers: Array<any>, components: Array<any> = [], imports: Array<any> = []): typeof TestBed {
     return TestBed.configureTestingModule({
       declarations: [...components],
       providers: [
-        OFF_LOGGER_PROVIDERS,
-        EIC_TEST_CORE_PROVIDERS,
+        ...OFF_LOGGER_PROVIDERS,
+        ...EIC_TEST_CORE_PROVIDERS,
         ...providers,
       ],
       imports: [
         IonicModule,
+        ...imports
       ]
     });
   }

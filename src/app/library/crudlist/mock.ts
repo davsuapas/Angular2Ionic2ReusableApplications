@@ -1,3 +1,4 @@
+import {EicCrudListEditionOperation} from './crudlist-edition-operation';
 import {EicNavControllerMock} from '../mock';
 import { EicCrudListController } from "./crudlist-controller";
 import { EicCrudListContainer } from "./crudlist-container";
@@ -9,4 +10,6 @@ export const eicCrudListContainerMock: EicCrudListContainer = new EicCrudListCon
 eicCrudListContainerMock.parent = EicCrudListControllerMock;
 
 export const EicListMock = jasmine.createSpyObj("List", ["enableSlidingItems", "closeSlidingItems", "containsSlidingItem"]);
+
+export const EicCrudListEditionOperationMock: EicCrudListEditionOperation = jasmine.createSpyObj("EicCrudListEditionOperation", ["addItem", "updateItem"]);
  

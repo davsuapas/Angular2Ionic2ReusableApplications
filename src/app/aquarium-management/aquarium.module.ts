@@ -1,13 +1,16 @@
+import {AquariumManagementEditionPage} from './aquarium-edition.component';
 import {AquariumDataTestMock} from './aquarium-data.test.mock';
 import { AquariumManagementListPage } from "./aquarium-list.component";
+import { AquariumManagementDataProvider } from "./aquarium-management-data-provider";
 import { APP_CONFIG } from "../config";
 
+import {IonicModule} from 'ionic-angular';
 import { NgModule } from "@angular/core";
-import { EicCrudListData, EicCrudListModule } from "../library/index";
+import { EicCrudListModule, EicFormEditionModule, EicFormValidationModule } from "../library/index";
 
-export function eicCrudListDataFactory(config: any): EicCrudListData {
-  if (config.debugBrowser) {
-      return  new AquariumDataTestMock();
+export function eicCrudListDataFactory(config: any): any {
+  if (config.debugNoServer) {
+      return new AquariumDataTestMock();
   }
   else {
       return new AquariumDataTestMock();
@@ -16,13 +19,17 @@ export function eicCrudListDataFactory(config: any): EicCrudListData {
 
 @NgModule({
     declarations: [
-        AquariumManagementListPage
+        AquariumManagementListPage,
+        AquariumManagementEditionPage
     ],
     imports: [
         EicCrudListModule,
+        EicFormEditionModule,
+        EicFormValidationModule,
+        IonicModule
     ],
     providers: [
-        {provide: EicCrudListData,
+        {provide: AquariumManagementDataProvider,
             useFactory: eicCrudListDataFactory,
             deps: [APP_CONFIG]            
         }

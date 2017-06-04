@@ -10,5 +10,5 @@ export const config = {
       clientId: "mobile"
     }
   },
-  debugBrowser: true
+  debugNoServer: true
 };

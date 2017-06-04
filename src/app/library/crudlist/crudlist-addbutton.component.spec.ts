@@ -6,7 +6,7 @@ import { LibraryTestUtils } from "../test";
 import {ComponentFixture, async} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-describe('EicCrudListAddButton', () => {
+describe('CrudListAddButton', () => {
 
   let fixture: ComponentFixture<EicCrudListAddButtonComponent>;
   let instance: EicCrudListAddButtonComponent;

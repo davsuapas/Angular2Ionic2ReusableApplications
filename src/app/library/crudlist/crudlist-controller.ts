@@ -3,7 +3,7 @@ import {EicCrudListEditionOperation} from "./crudlist-edition-operation";
 import {EicCrudListOptions} from "./crudlist-options";
 import {EicCrudListData} from "./crudlist-data";
 import {EicCrudListContainer} from "./crudlist-container";
-import {EicEnumEditionType} from "../formedit/edition-controller";
+import {EicEnumEditionType} from "../form-edition/edition-type";
 import {EicCrudListOperation} from "./crudlist-operation";
 
 import {OnInit, ViewChild} from "@angular/core";

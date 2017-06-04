@@ -1,5 +1,3 @@
-import {EicCrudListItemComponent} from './crudlist-item.component';
-import {EicCrudListAddButtonComponent} from './crudlist-addbutton.component';
 import {EicNavControllerMock} from '../mock';
 import {EicListMock, eicCrudListContainerMock} from './mock';
 import {EicCrudListContainer} from './crudlist-container';
@@ -21,7 +19,3 @@ export const EIC_PROVIDER_TEST_CRUDLIST = [
     EIC_PROVIDER_TEST_CRUDLIST_CONTROLLER
 ];
 
-export const EIC_COMPONENT_TEST_CRUDLIST = [
-    EicCrudListAddButtonComponent,
-    EicCrudListItemComponent
-];

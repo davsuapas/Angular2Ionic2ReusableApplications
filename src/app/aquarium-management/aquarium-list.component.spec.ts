@@ -1,10 +1,11 @@
 import {AquariumDataTestMock} from './aquarium-data.test.mock';
 import {AquariumManagementListPage} from './aquarium-list.component';
+import { AquariumManagementDataProvider } from "./aquarium-management-data-provider";
 import {TestUtils} from "../../test";
 
 import { ComponentFixture, async } from '@angular/core/testing';
-import { EIC_COMPONENT_TEST_CRUDLIST, EIC_PROVIDER_TEST_CRUDLIST } from "../library/test/index";
-import { EicCrudListData } from "../library/index";
+import {EIC_PROVIDER_TEST_CRUDLIST } from "../library/test/index";
+import { EicCrudListModule } from "../library/index";
 
 describe('AquariumManagementListPage', () => {
 
@@ -12,10 +13,11 @@ describe('AquariumManagementListPage', () => {
   let instance: AquariumManagementListPage;
 
   beforeEach(async(() => TestUtils.beforeEachCompiler(
-    [AquariumManagementListPage, EIC_COMPONENT_TEST_CRUDLIST],
+    [AquariumManagementListPage],
     [EIC_PROVIDER_TEST_CRUDLIST,
-      {provide: EicCrudListData, useClass: AquariumDataTestMock} 
-    ]).then(compiled => {
+      {provide: AquariumManagementDataProvider, useClass: AquariumDataTestMock} 
+    ], 
+    [EicCrudListModule]).then(compiled => {
       fixture = compiled.fixture;
       instance = compiled.instance;
   })));

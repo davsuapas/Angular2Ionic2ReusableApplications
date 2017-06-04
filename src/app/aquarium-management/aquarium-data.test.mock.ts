@@ -1,4 +1,6 @@
-import { EicKeyName, EicCrudListData } from "../library/index";
+import { AquariumManagementDataProvider } from "./aquarium-management-data-provider";
+
+import { EicKeyName } from "../library/index";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/of";
@@ -8,14 +10,31 @@ import "rxjs/add/observable/of";
  */
 @Injectable()
 @EicKeyName("id")
-export class AquariumDataTestMock implements EicCrudListData {
+export class AquariumDataTestMock extends AquariumManagementDataProvider {
+
+      getById(id) {
+        return Observable.of({
+                id: "1",
+                name: "Aquario 1",
+                type: "saltWater",
+                creationDate: new Date(),
+                high: 3,
+                width: 3,
+                deep: 2,
+                capacity: 5,
+                profileId: "1"
+        });
+    }
+
+    save(entity) {
+        return Observable.of(entity);
+    }
 
     getAll() {
-
         return Observable.of<any[]>([
                 {id: "1", name: "Aquario 1"},
                 {id: "2", name: "Aquario 2"},
-                {id: "3", name: "Aquario 3s"},
+                {id: "3", name: "Aquario 3"},
                 {id: "4", name: "Aquario 4"},
                 {id: "5", name: "Aquario 5"},
                 {id: "6", name: "Aquario 6"},
